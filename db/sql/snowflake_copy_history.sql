@@ -1,0 +1,27 @@
+select
+    file_name,
+    stage_location,
+    last_load_time,
+    row_count,
+    row_parsed,
+    file_size,
+    first_error_message,
+    first_error_line_number,
+    first_error_character_pos,
+    first_error_column_name,
+    error_count,
+    error_limit,
+    status,
+    table_id,
+    table_name,
+    table_schema_id,
+    table_schema_name,
+    table_catalog_id,
+    table_catalog_name,
+    pipe_catalog_name,
+    pipe_schema_name,
+    pipe_name,
+    pipe_received_time,
+    first_commit_time
+from
+    snowflake.account_usage.copy_history;

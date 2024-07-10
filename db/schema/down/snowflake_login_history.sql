@@ -1,0 +1,1 @@
+drop table if exists snowflake_login_history;

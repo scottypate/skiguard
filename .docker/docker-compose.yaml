@@ -1,0 +1,13 @@
+services:
+
+  snowguard:
+    image: snowguard
+    build:
+      context: .
+      dockerfile: snowguard.Dockerfile
+    container_name: snowguard
+    ports:
+      - "8080:8088"
+    volumes:
+      - ../:/home/snowguard
+      - ./superset_config.py:/app/superset/config.py
