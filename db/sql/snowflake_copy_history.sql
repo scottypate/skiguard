@@ -23,5 +23,7 @@ select
     coalesce(pipe_name, 'NONE') as pipe_name,
     coalesce(pipe_received_time, '1970-01-01') as pipe_received_time,
     coalesce(first_commit_time, '1970-01-01') as first_commit_time
- from
-    snowflake.account_usage.copy_history;
+from
+   snowflake.account_usage.copy_history
+where
+   last_load_time >= current_date() - interval '60 day'

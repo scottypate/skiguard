@@ -14,4 +14,6 @@ select
     coalesce(related_event_id::integer, 0) as related_event_id,
     coalesce(connection, 'NONE') as connection
 from
-    snowflake.account_usage.login_history;
+    snowflake.account_usage.login_history
+where
+   event_timestamp >= current_date() - interval '60 day'

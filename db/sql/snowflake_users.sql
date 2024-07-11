@@ -9,4 +9,4 @@ select
 from
     snowflake.account_usage.users
 where
-    deleted_on is null;
+    deleted_on is null
