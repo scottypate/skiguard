@@ -21,4 +21,6 @@ RUN superset fab create-admin --username admin --password admin --firstname admi
     superset db upgrade && \
     superset init
 
-USER root
+RUN echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
+
+WORKDIR /home/snowguard

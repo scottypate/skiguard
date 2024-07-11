@@ -1,17 +1,17 @@
 select
-    event_id,
+    coalesce(event_id::integer, 0) as event_id,
     event_timestamp,
-    event_type,
-    user_name,
-    client_ip,
-    reported_client_type,
-    reported_client_version,
-    first_authentication_factor,
+    coalesce(event_type, 'NONE') as event_type,
+    coalesce(user_name, 'NONE') as user_name,
+    coalesce(client_ip, 'NONE') as client_ip,
+    coalesce(reported_client_type, 'NONE') as reported_client_type,
+    coalesce(reported_client_version, 'NONE') as reported_client_version,
+    coalesce(first_authentication_factor, 'NONE') as first_authentication_factor,
     coalesce(second_authentication_factor, 'NONE') as second_authentication_factor,
-    is_success,
-    coalesce(error_code, 0) as error_code,
+    coalesce(is_success, 'NONE') as is_success,
+    coalesce(error_code::integer, 0) as error_code,
     coalesce(error_message, 'NONE') as error_message,
-    related_event_id,
-    coalesce(connection, 'NONE') as connection,
+    coalesce(related_event_id::integer, 0) as related_event_id,
+    coalesce(connection, 'NONE') as connection
 from
     snowflake.account_usage.login_history;

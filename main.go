@@ -9,6 +9,7 @@ import (
 	"github.com/scalecraft/snowguard/internal/duckdb"
 	"github.com/scalecraft/snowguard/internal/loginhistory"
 	"github.com/scalecraft/snowguard/internal/snowflake"
+	"github.com/scalecraft/snowguard/internal/users"
 )
 
 func main() {
@@ -23,13 +24,20 @@ func main() {
 
 	err = loginhistory.Load(snowflakeDb)
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error loading login history: %s", err.Error()))
+		slog.Error(fmt.Sprintf("Error loading login_history: %s", err.Error()))
 	}
 
 	err = copyhistory.Load(snowflakeDb)
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error loading copy history: %s", err.Error()))
+		slog.Error(fmt.Sprintf("Error loading copy_history: %s", err.Error()))
 	}
+
+	err = users.Load(snowflakeDb)
+	if err != nil {
+		slog.Error(fmt.Sprintf("Error loading users: %s", err.Error()))
+	}
+
+	duckdb.Execute("checkpoint;")
 }
 
 func runMigrations(dir string) {
