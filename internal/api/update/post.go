@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/scalecraft/snowguard/internal/copyhistory"
+	"github.com/scalecraft/snowguard/internal/loginhistory"
 	"github.com/scalecraft/snowguard/internal/users"
 )
 
@@ -34,17 +36,18 @@ func PostHandler(db *sql.DB) gin.HandlerFunc {
 }
 
 func update(req PostHandlerRequest) (*PostHandlerResponse, error) {
-	// err := loginhistory.Update(req.db)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	err := loginhistory.Update(req.db)
+	if err != nil {
+		return nil, err
+	}
 
-	// err = copyhistory.Update(req.db)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	err = copyhistory.Update(req.db)
+	if err != nil {
+		return nil, err
+	}
+
 	fmt.Println("here")
-	err := users.Update(req.db)
+	err = users.Update(req.db)
 	if err != nil {
 		return nil, err
 	}

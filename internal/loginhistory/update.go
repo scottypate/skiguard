@@ -1,4 +1,4 @@
-package users
+package loginhistory
 
 import (
 	"database/sql"
@@ -12,12 +12,12 @@ import (
 
 func Update(db *sql.DB) error {
 	latestDate, err := getLatestDate()
-	fileByte, err := os.ReadFile("db/sql/snowflake_users.sql")
+	fileByte, err := os.ReadFile("db/sql/snowflake_login_history.sql")
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error reading file snowflake_users: %s", err.Error()))
+		slog.Error(fmt.Sprintf("Error reading file snowflake_login_history: %s", err.Error()))
 	}
 
-	sql := fmt.Sprintf("%v and created_on > '%s'", string(fileByte), *latestDate)
+	sql := fmt.Sprintf("%v and event_timestamp > '%s'", string(fileByte), *latestDate)
 
 	err = executeQuery(db, sql)
 
@@ -29,7 +29,7 @@ func Update(db *sql.DB) error {
 
 func getLatestDate() (*string, error) {
 	var iso8601 string
-	sql := "select max(created_on) from main.snowflake_users"
+	sql := "select max(event_timestamp) from main.snowflake_login_history"
 	row, err := duckdb.Query(sql)
 
 	if err != nil {
