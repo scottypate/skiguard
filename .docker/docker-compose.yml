@@ -3,11 +3,19 @@ services:
   snowguard:
     image: snowguard
     build:
-      context: .
-      dockerfile: snowguard.Dockerfile
+      context: ..
+      dockerfile: .docker/snowguard.Dockerfile
     container_name: snowguard
     ports:
-      - "8080:8088"
-    volumes:
-      - ../:/home/snowguard
-      - ./superset_config.py:/app/superset/config.py
+      - "50052:8088"
+      - "50051:50051"
+    environment:
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE}
+      - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE}
+      - SUPERSET_ADMIN_KEY=${SUPERSET_ADMIN_KEY}
+    # volumes:
+    #   - ../:/home/snowguard
+    #   - ./superset_config.py:/app/superset/config.py

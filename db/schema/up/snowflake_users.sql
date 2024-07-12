@@ -1,6 +1,8 @@
 create table if not exists snowflake_users (
-    login_name string primary key,
+    user_id bigint primary key,
+    login_name string,
     created_on timestamp,
+    deleted_on timestamp,
     email string,
     has_password boolean,
     disabled boolean,

@@ -3,7 +3,6 @@ package users
 import (
 	"database/sql"
 	"fmt"
-	"log/slog"
 	"os"
 	"time"
 
@@ -12,12 +11,16 @@ import (
 
 func Update(db *sql.DB) error {
 	latestDate, err := getLatestDate()
-	fileByte, err := os.ReadFile("db/sql/snowflake_users.sql")
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error reading file snowflake_users: %s", err.Error()))
+		return err
 	}
 
-	sql := fmt.Sprintf("%v and created_on > '%s'", string(fileByte), *latestDate)
+	fileByte, err := os.ReadFile("db/sql/snowflake_users.sql")
+	if err != nil {
+		return err
+	}
+
+	sql := fmt.Sprintf("%v and created_on >= '%s'::timestamp + interval '1 second'", string(fileByte), *latestDate)
 
 	err = executeQuery(db, sql)
 

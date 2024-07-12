@@ -122,3 +122,5 @@ venv.bak/
 
 # DuckDB
 *snowguard.db*
+
+bin/snowguard*

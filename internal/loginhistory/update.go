@@ -3,7 +3,6 @@ package loginhistory
 import (
 	"database/sql"
 	"fmt"
-	"log/slog"
 	"os"
 	"time"
 
@@ -12,12 +11,16 @@ import (
 
 func Update(db *sql.DB) error {
 	latestDate, err := getLatestDate()
-	fileByte, err := os.ReadFile("db/sql/snowflake_login_history.sql")
 	if err != nil {
-		slog.Error(fmt.Sprintf("Error reading file snowflake_login_history: %s", err.Error()))
+		return err
 	}
 
-	sql := fmt.Sprintf("%v and event_timestamp > '%s'", string(fileByte), *latestDate)
+	fileByte, err := os.ReadFile("db/sql/snowflake_login_history.sql")
+	if err != nil {
+		return err
+	}
+
+	sql := fmt.Sprintf("%v and event_timestamp >= '%s'::timestamp + interval '1 second'", string(fileByte), *latestDate)
 
 	err = executeQuery(db, sql)
 

@@ -24,3 +24,10 @@ RUN superset fab create-admin --username admin --password admin --firstname admi
 RUN echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 
 WORKDIR /home/snowguard
+
+COPY .docker/entrypoint.sh /home/snowguard/entrypoint.sh
+COPY ./bin /home/snowguard/bin
+COPY ./db /home/snowguard/db
+COPY .docker/superset_config.py /app/superset/config.py
+
+ENTRYPOINT ["/home/snowguard/entrypoint.sh"]
