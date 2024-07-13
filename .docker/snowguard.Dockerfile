@@ -5,7 +5,7 @@ USER root
 ARG SUPERSET_SECRET_KEY
 ENV SUPERSET_SECRET_KEY=SUPERSET_SECRET_KEY
 
-RUN apt update && apt install -y jq
+RUN apt update && apt install -y jq cron
 
 RUN cd /usr/local && \
     curl -O https://dl.google.com/go/go1.22.5.linux-arm64.tar.gz && \
@@ -29,5 +29,8 @@ COPY .docker/entrypoint.sh /home/snowguard/entrypoint.sh
 COPY ./bin /home/snowguard/bin
 COPY ./db /home/snowguard/db
 COPY .docker/superset_config.py /app/superset/config.py
+COPY .docker/snowguard-cron /etc/cron.d/snowguard-cron
+
+RUN crontab /etc/cron.d/snowguard-cron && touch /var/log/cron.log
 
 ENTRYPOINT ["/home/snowguard/entrypoint.sh"]
