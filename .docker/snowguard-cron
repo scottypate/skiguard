@@ -1,2 +1,2 @@
-5 * * * * curl -X POST localhost:50051/update >> /var/log/cron.log 2>&1
-15 * * * * curl -X POST localhost:50051/alert >> /var/log/cron.log 2>&1
+5 * * * * curl -m 100 -s -X POST localhost:50051/update >> /var/log/cron.log 2>&1
+15 * * * * curl -m 100 -s -X POST localhost:50051/alert >> /var/log/cron.log 2>&1

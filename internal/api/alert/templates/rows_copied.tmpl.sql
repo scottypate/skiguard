@@ -29,4 +29,6 @@ select
 from
     rows_copied
 qualify
-    rn = 1;
+    rn = 1
+    and
+    rows_copied > (p100 * {{ .AlertThreshold }});

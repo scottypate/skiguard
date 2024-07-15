@@ -13,7 +13,7 @@ import (
 )
 
 type PostHandlerRequest struct {
-	cfg *config.Config
+	Cfg *config.Config
 }
 
 type PostHandlerResponse struct {
@@ -21,9 +21,9 @@ type PostHandlerResponse struct {
 
 func PostHandler(cfg *config.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		req := PostHandlerRequest{cfg: cfg}
+		req := PostHandlerRequest{Cfg: cfg}
 
-		response, err := dataLoad(req)
+		response, err := DataLoad(req)
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
@@ -36,8 +36,8 @@ func PostHandler(cfg *config.Config) gin.HandlerFunc {
 	}
 }
 
-func dataLoad(req PostHandlerRequest) (*PostHandlerResponse, error) {
-	snowflakeDB, err := snowflake.Connect(req.cfg.SnowflakeDSN)
+func DataLoad(req PostHandlerRequest) (*PostHandlerResponse, error) {
+	snowflakeDB, err := snowflake.Connect(req.Cfg.SnowflakeDSN)
 	if err != nil {
 		return nil, err
 	}

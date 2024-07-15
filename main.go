@@ -28,6 +28,25 @@ func dbMigration() {
 	duckdb.RunMigrations("db/schema/up")
 }
 
+func initialLoad(cfg *config.Config) {
+	// Delete all data from duckdb on startup
+	slog.Debug("deleting all data from duckdb")
+	_, err := delete.Delete()
+	if err != nil {
+		slog.Error(fmt.Sprintf("error deleting all data from duckdb: %v", err))
+		panic(err)
+	}
+
+	// Load data from snowflake on startup and fail if unable to load
+	slog.Info("loading data from snowflake")
+	_, err = load.DataLoad(load.PostHandlerRequest{Cfg: cfg})
+
+	if err != nil {
+		slog.Error(fmt.Sprintf("error loading data from snowflake: %v", err))
+		panic(err)
+	}
+}
+
 func main() {
 	dbMigration()
 	err := godotenv.Load()
@@ -48,12 +67,14 @@ func main() {
 		if cfg.SlackChannelId == "" {
 			panic("slack channel is required when slack token is set")
 		}
-		err := slack.SendWelcomeMessage(cfg.SlackChannelId, cfg.SlackToken)
+		err := slack.AuthVerity(cfg.SlackToken)
 
 		if err != nil {
 			panic(fmt.Sprintf("error sending welcome message to slack channel: %v", err))
 		}
 	}
+
+	initialLoad(cfg)
 
 	r := gin.Default()
 	r.Use(gin.Recovery())

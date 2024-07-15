@@ -16,4 +16,6 @@ select
 from
     snowflake.account_usage.login_history
 where
-   event_timestamp >= current_date() - interval '60 day'
+    1=1
+    and
+    event_timestamp >= current_date() - interval '60 day'

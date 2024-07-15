@@ -1,0 +1,30 @@
+{
+    "display_information": {
+        "name": "Snowguard",
+        "description": "Snowflake security monitoring app",
+        "background_color": "#0f0f0f",
+        "long_description": "Snowguard monitors Snowflake for abnormal activity and posts alerts to slack for awareness. The following Snowflake activity is monitored.\r\n\r\n* User Deletion\r\n* User Creation\r\n* Number of rows copied out of Snowflake\r\n* Number of copy actions out of Snowflake\r\n* Failed Logins\r\n* Total Logins"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "Snowguard",
+            "always_online": true
+        }
+    },
+    "oauth_config": {
+        "redirect_urls": [
+            "https://slack.com/oauth/v2/authorize?scope=channels:join,chat:write&client_id=7392377040533.7393531471575"
+        ],
+        "scopes": {
+            "bot": [
+                "channels:join",
+                "chat:write"
+            ]
+        }
+    },
+    "settings": {
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}

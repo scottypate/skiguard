@@ -26,4 +26,6 @@ select
 from
    snowflake.account_usage.copy_history
 where
+   1=1
+   and
    last_load_time >= current_date() - interval '60 day'

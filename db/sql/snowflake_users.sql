@@ -10,3 +10,5 @@ select
     coalesce(password_last_set_time, '1970-01-01') as password_last_set_time
 from
     snowflake.account_usage.users
+where
+    1=1

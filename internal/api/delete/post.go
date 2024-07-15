@@ -17,7 +17,7 @@ type DeleteHandlerResponse struct {
 
 func DeleteHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		response, err := delete()
+		response, err := Delete()
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
@@ -30,7 +30,7 @@ func DeleteHandler() gin.HandlerFunc {
 	}
 }
 
-func delete() (*DeleteHandlerResponse, error) {
+func Delete() (*DeleteHandlerResponse, error) {
 	err := loginhistory.Delete()
 	if err != nil {
 		return nil, err
