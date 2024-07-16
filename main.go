@@ -17,6 +17,7 @@ import (
 	"github.com/scalecraft/snowguard/internal/api/delete"
 	"github.com/scalecraft/snowguard/internal/api/health"
 	"github.com/scalecraft/snowguard/internal/api/load"
+	"github.com/scalecraft/snowguard/internal/api/truncate"
 	"github.com/scalecraft/snowguard/internal/api/update"
 	"github.com/scalecraft/snowguard/internal/config"
 	"github.com/scalecraft/snowguard/internal/duckdb"
@@ -89,6 +90,7 @@ func main() {
 	r.POST("/update", update.PostHandler(cfg))
 	r.POST("/alert", alert.PostHandler(cfg))
 	r.DELETE("/delete", delete.DeleteHandler())
+	r.POST("/truncate", truncate.PostHandler())
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", cfg.HttpPort),
