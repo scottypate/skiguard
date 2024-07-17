@@ -30,6 +30,7 @@ COPY ./bin /home/snowguard/bin
 COPY ./db /home/snowguard/db
 COPY .docker/superset_config.py /app/superset/config.py
 COPY .docker/snowguard-cron /etc/cron.d/snowguard-cron
+COPY ./internal/api/alert/templates/ /home/snowguard/internal/api/alert/templates/
 
 RUN crontab /etc/cron.d/snowguard-cron && touch /var/log/cron.log
 

@@ -16,7 +16,7 @@ type PostHandlerResponse struct {
 
 func PostHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		response, err := Delete()
+		response, err := Truncate()
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
@@ -29,7 +29,7 @@ func PostHandler() gin.HandlerFunc {
 	}
 }
 
-func Delete() (*PostHandlerResponse, error) {
+func Truncate() (*PostHandlerResponse, error) {
 	err := loginhistory.Truncate()
 	if err != nil {
 		return nil, err

@@ -55,6 +55,7 @@ func main() {
 		slog.Debug("no .env file found. proceeding with existing environment variables")
 	}
 	cfg := config.GetConfig()
+	gin.SetMode(cfg.GinMode)
 
 	_, err = snowflake.Connect(cfg.SnowflakeDSN)
 
@@ -89,8 +90,8 @@ func main() {
 	r.POST("/load", load.PostHandler(cfg))
 	r.POST("/update", update.PostHandler(cfg))
 	r.POST("/alert", alert.PostHandler(cfg))
-	r.DELETE("/delete", delete.DeleteHandler())
 	r.POST("/truncate", truncate.PostHandler())
+	r.DELETE("/delete", delete.DeleteHandler())
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", cfg.HttpPort),

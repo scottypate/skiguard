@@ -18,6 +18,7 @@ type Config struct {
 	ShutdownTimeout    time.Duration
 	AlertThreshold     float64
 	NowUTC             string
+	GinMode            string
 }
 
 func GetConfig() *Config {
@@ -32,6 +33,7 @@ func GetConfig() *Config {
 		SlackChannelId:     getEnv("SLACK_CHANNEL_ID", "", false),
 		ShutdownTimeout:    getEnv("SHUTDOWN_TIMEOUT", 10*time.Second, false),
 		AlertThreshold:     getEnv("ALERT_THRESHOLD", 0.90, false),
+		GinMode:            getEnv("GIN_MODE", "release", false),
 	}
 
 	c.SnowflakeDSN = fmt.Sprintf(
