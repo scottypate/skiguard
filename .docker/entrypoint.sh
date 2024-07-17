@@ -6,4 +6,4 @@
 nohup sh -c /usr/bin/run-server.sh &
 
 # Start SnowGuard
-/home/snowguard/bin/snowguard-linux-arm64
+/home/snowguard/bin/snowguard-linux-amd64
