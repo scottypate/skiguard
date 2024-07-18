@@ -17,17 +17,21 @@ RUN cd /usr/local && \
 RUN pip install --upgrade pip && \
     pip install duckdb-engine
 
+COPY ./db /home/snowguard/db
+
 RUN superset fab create-admin --username admin --password admin --firstname admin --lastname admin --email admin@admin.com && \
     superset db upgrade && \
-    superset init
+    superset init && \
+    superset import-datasources -p /home/snowguard/db/superset/datasources.zip && \
+    superset import-dashboards -p /home/snowguard/db/superset/dashboard.zip -u admin
 
 RUN echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 
 WORKDIR /home/snowguard
 
 COPY .docker/entrypoint.sh /home/snowguard/entrypoint.sh
+COPY ./docs/images/snowguard.png /app/superset/static/assets/images/snowguard.png
 COPY ./bin /home/snowguard/bin
-COPY ./db /home/snowguard/db
 COPY .docker/superset_config.py /app/superset/config.py
 COPY .docker/snowguard-cron /etc/cron.d/snowguard-cron
 COPY ./internal/api/alert/templates/ /home/snowguard/internal/api/alert/templates/
