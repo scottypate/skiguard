@@ -55,6 +55,8 @@ func main() {
 		slog.Debug("no .env file found. proceeding with existing environment variables")
 	}
 	cfg := config.GetConfig()
+	config.ValidateLicenseKey(cfg.LicenseKey)
+
 	gin.SetMode(cfg.GinMode)
 
 	_, err = snowflake.Connect(cfg.SnowflakeDSN)

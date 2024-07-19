@@ -19,6 +19,7 @@ type Config struct {
 	AlertThreshold     float64
 	NowUTC             string
 	GinMode            string
+	LicenseKey         string
 }
 
 func GetConfig() *Config {
@@ -28,6 +29,7 @@ func GetConfig() *Config {
 		SnowflakePassword:  getEnv("SNOWFLAKE_PASSWORD", "", true),
 		SnowflakeWarehouse: getEnv("SNOWFLAKE_WAREHOUSE", "", true),
 		SnowflakeRole:      getEnv("SNOWFLAKE_ROLE", "", true),
+		LicenseKey:         getEnv("LICENSE_KEY", "", true),
 		HttpPort:           getEnv("HTTP_PORT", 50051, false),
 		SlackToken:         getEnv("SLACK_TOKEN", "", false),
 		SlackChannelId:     getEnv("SLACK_CHANNEL_ID", "", false),
