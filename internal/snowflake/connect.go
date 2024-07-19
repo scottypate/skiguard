@@ -12,11 +12,5 @@ func Connect(snowflakeConnStr string) (*sql.DB, error) {
 		return nil, err
 	}
 
-	_, err = db.Exec("use database SNOWFLAKE;")
-
-	if err != nil {
-		return nil, err
-	}
-
 	return db, nil
 }

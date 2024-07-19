@@ -32,7 +32,7 @@ func Update(db *sql.DB) error {
 
 func getLatestDate() (*string, error) {
 	var iso8601 string
-	sql := "select max(last_load_time) from main.snowflake_copy_history"
+	sql := "select coalesce(max(last_load_time), '1970-01-01'::timestamp) from main.snowflake_copy_history"
 	row, err := duckdb.Query(sql)
 
 	if err != nil {

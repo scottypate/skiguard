@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -29,7 +30,7 @@ func GetConfig() *Config {
 		SnowflakePassword:  getEnv("SNOWFLAKE_PASSWORD", "", true),
 		SnowflakeWarehouse: getEnv("SNOWFLAKE_WAREHOUSE", "", true),
 		SnowflakeRole:      getEnv("SNOWFLAKE_ROLE", "", true),
-		LicenseKey:         getEnv("LICENSE_KEY", "", true),
+		LicenseKey:         getEnv("SNOWGUARD_LICENSE_KEY", "", true),
 		HttpPort:           getEnv("HTTP_PORT", 50051, false),
 		SlackToken:         getEnv("SLACK_TOKEN", "", false),
 		SlackChannelId:     getEnv("SLACK_CHANNEL_ID", "", false),
@@ -39,11 +40,10 @@ func GetConfig() *Config {
 	}
 
 	c.SnowflakeDSN = fmt.Sprintf(
-		"%s:%s@%s/%s?warehouse=%s&role=%s",
+		"%s:%s@%s/?warehouse=%s&role=%s",
 		c.SnowflakeUser,
-		c.SnowflakePassword,
+		url.QueryEscape(c.SnowflakePassword),
 		c.SnowflakeAccount,
-		"SNOWFLAKE",
 		c.SnowflakeWarehouse,
 		c.SnowflakeRole,
 	)

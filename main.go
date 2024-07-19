@@ -34,8 +34,7 @@ func initialLoad(cfg *config.Config) {
 	slog.Debug("deleting all data from duckdb")
 	_, err := delete.Delete()
 	if err != nil {
-		slog.Error(fmt.Sprintf("error deleting all data from duckdb: %v", err))
-		panic(err)
+		log.Fatalf("error deleting all data from duckdb: %v", err)
 	}
 
 	// Load data from snowflake on startup and fail if unable to load
@@ -43,8 +42,7 @@ func initialLoad(cfg *config.Config) {
 	_, err = load.DataLoad(load.PostHandlerRequest{Cfg: cfg})
 
 	if err != nil {
-		slog.Error(fmt.Sprintf("error loading data from snowflake: %v", err))
-		panic(err)
+		log.Fatalf("error loading data from snowflake: %v", err)
 	}
 }
 
@@ -62,19 +60,19 @@ func main() {
 	_, err = snowflake.Connect(cfg.SnowflakeDSN)
 
 	if err != nil {
-		panic(err)
+		log.Fatalf("error connecting to snowflake: %v", err)
 	}
 
 	if cfg.SlackToken == "" {
 		slog.Debug("slack token is not set. proceeding without slack integration")
 	} else {
 		if cfg.SlackChannelId == "" {
-			panic("slack channel is required when slack token is set")
+			log.Fatal("slack channel is required when slack token is set")
 		}
 		err := slack.AuthVerity(cfg.SlackToken)
 
 		if err != nil {
-			panic(fmt.Sprintf("error sending welcome message to slack channel: %v", err))
+			log.Fatalf("error authenticating to slack: %v", err)
 		}
 	}
 
@@ -106,7 +104,7 @@ func main() {
 		}
 	}()
 
-	slog.Info(fmt.Sprintf("Server started on port %d", cfg.HttpPort))
+	slog.Info("Snowguard application started successfully.")
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)

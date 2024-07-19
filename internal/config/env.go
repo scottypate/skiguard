@@ -1,7 +1,7 @@
 package config
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"time"
@@ -13,7 +13,7 @@ func getEnv[T float64 | string | int | bool | time.Duration](key string, default
 		if !required {
 			return defaultVal
 		} else {
-			panic(fmt.Sprintf("missing required environment variable %s", key))
+			log.Fatalf("missing required environment variable %s", key)
 		}
 	}
 
@@ -57,7 +57,7 @@ func getEnv[T float64 | string | int | bool | time.Duration](key string, default
 		}
 	default:
 		{
-			panic(fmt.Sprintf("unsupported type %T", out))
+			log.Fatalf("unsupported type %T", out)
 		}
 	}
 

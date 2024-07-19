@@ -5,7 +5,7 @@ USER root
 ARG SUPERSET_SECRET_KEY
 ENV SUPERSET_SECRET_KEY=SUPERSET_SECRET_KEY
 
-RUN apt update && apt install -y jq cron vim
+RUN apt update && apt install -y jq cron vim systemd
 
 RUN cd /usr/local && \
     curl -O https://dl.google.com/go/go1.22.5.linux-arm64.tar.gz && \
