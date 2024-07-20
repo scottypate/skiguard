@@ -5,6 +5,8 @@ create table if not exists snowflake_users (
     deleted_on timestamp,
     email string,
     has_password boolean,
+    ext_authn_duo boolean,
+    ext_authn_uid boolean,
     disabled boolean,
     last_success_login timestamp,
     password_last_set_time timestamp

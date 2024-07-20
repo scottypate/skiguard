@@ -9,6 +9,8 @@ type Users struct {
 	DeletedOn           time.Time `json:"deleted_on"`
 	Email               string    `json:"email"`
 	HasPassword         bool      `json:"has_password"`
+	ExtAuthnDuo         bool      `json:"ext_authn_duo"`
+	ExtAuthnUid         bool      `json:"ext_authn_uid"`
 	Disabled            bool      `json:"disabled"`
 	LastSuccessLogin    time.Time `json:"last_success_login"`
 	PasswordLastSetTime time.Time `json:"password_last_set_time"`
