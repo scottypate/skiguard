@@ -34,8 +34,8 @@ func ValidateLicenseKey(licenseKey string) {
 			log.Fatal("Machine activation failed!")
 		}
 	case err == keygen.ErrLicenseExpired:
-		log.Fatal("Snowguard license is expired!")
+		log.Fatal("Skiguard license is expired!")
 	case err != nil:
-		log.Fatalf("Snowguard license is invalid! %v", err)
+		log.Fatalf("Skiguard license is invalid! %v", err)
 	}
 }

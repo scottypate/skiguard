@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/scalecraft/snowguard/internal/copyhistory"
-	"github.com/scalecraft/snowguard/internal/loginhistory"
-	"github.com/scalecraft/snowguard/internal/users"
+	"github.com/scalecraft/skiguard/internal/copyhistory"
+	"github.com/scalecraft/skiguard/internal/loginhistory"
+	"github.com/scalecraft/skiguard/internal/users"
 )
 
 type DeleteHandlerRequest struct {

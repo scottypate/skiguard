@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/scalecraft/snowguard/internal/duckdb"
+	"github.com/scalecraft/skiguard/internal/duckdb"
 )
 
 func executeQuery(db *sql.DB, query string) error {

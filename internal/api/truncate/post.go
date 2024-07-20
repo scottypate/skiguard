@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/scalecraft/snowguard/internal/copyhistory"
-	"github.com/scalecraft/snowguard/internal/loginhistory"
+	"github.com/scalecraft/skiguard/internal/copyhistory"
+	"github.com/scalecraft/skiguard/internal/loginhistory"
 )
 
 type PostHandlerRequest struct {

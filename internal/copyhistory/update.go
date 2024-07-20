@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/scalecraft/snowguard/internal/duckdb"
+	"github.com/scalecraft/skiguard/internal/duckdb"
 )
 
 func Update(db *sql.DB) error {

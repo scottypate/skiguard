@@ -30,7 +30,7 @@ func GetConfig() *Config {
 		SnowflakePassword:  getEnv("SNOWFLAKE_PASSWORD", "", true),
 		SnowflakeWarehouse: getEnv("SNOWFLAKE_WAREHOUSE", "", true),
 		SnowflakeRole:      getEnv("SNOWFLAKE_ROLE", "", true),
-		LicenseKey:         getEnv("SNOWGUARD_LICENSE_KEY", "", true),
+		LicenseKey:         getEnv("SKIGUARD_LICENSE_KEY", "", true),
 		HttpPort:           getEnv("HTTP_PORT", 50051, false),
 		SlackToken:         getEnv("SLACK_TOKEN", "", false),
 		SlackChannelId:     getEnv("SLACK_CHANNEL_ID", "", false),

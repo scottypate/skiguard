@@ -9,9 +9,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/scalecraft/snowguard/internal/config"
-	"github.com/scalecraft/snowguard/internal/duckdb"
-	"github.com/scalecraft/snowguard/internal/slack"
+	"github.com/scalecraft/skiguard/internal/config"
+	"github.com/scalecraft/skiguard/internal/duckdb"
+	"github.com/scalecraft/skiguard/internal/slack"
 )
 
 type Alert struct {

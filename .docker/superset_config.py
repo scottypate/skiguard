@@ -283,10 +283,10 @@ AUTH_RATE_LIMIT = "5 per second"
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Snowguard"
+APP_NAME = "Skiguard"
 
 # Specify the App icon
-APP_ICON = "/static/assets/images/snowguard.png"
+APP_ICON = "/static/assets/images/skiguard.png"
 
 # Specify where clicking the logo would take the user
 # e.g. setting it to '/' would take the user to '/superset/welcome/'

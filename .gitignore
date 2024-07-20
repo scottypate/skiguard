@@ -121,6 +121,6 @@ venv.bak/
 *.tfstate*
 
 # DuckDB
-*snowguard.db*
+*skiguard.db*
 
-bin/snowguard*
+bin/skiguard*

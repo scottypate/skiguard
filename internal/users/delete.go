@@ -1,6 +1,6 @@
 package users
 
-import "github.com/scalecraft/snowguard/internal/duckdb"
+import "github.com/scalecraft/skiguard/internal/duckdb"
 
 func Delete() error {
 	err := duckdb.Execute("delete from snowflake_users")

@@ -17,25 +17,25 @@ RUN cd /usr/local && \
 RUN pip install --upgrade pip && \
     pip install duckdb-engine
 
-COPY ./db /home/snowguard/db
+COPY ./db /home/skiguard/db
 
 RUN superset fab create-admin --username admin --password admin --firstname admin --lastname admin --email admin@admin.com && \
     superset db upgrade && \
     superset init && \
-    superset import-datasources -p /home/snowguard/db/superset/datasources.zip && \
-    superset import-dashboards -p /home/snowguard/db/superset/dashboard.zip -u admin
+    superset import-datasources -p /home/skiguard/db/superset/datasources.zip && \
+    superset import-dashboards -p /home/skiguard/db/superset/dashboard.zip -u admin
 
 RUN echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 
-WORKDIR /home/snowguard
+WORKDIR /home/skiguard
 
-COPY .docker/entrypoint.sh /home/snowguard/entrypoint.sh
-COPY ./docs/images/snowguard.png /app/superset/static/assets/images/snowguard.png
-COPY ./bin /home/snowguard/bin
+COPY .docker/entrypoint.sh /home/skiguard/entrypoint.sh
+COPY ./docs/images/skiguard.png /app/superset/static/assets/images/skiguard.png
+COPY ./bin /home/skiguard/bin
 COPY .docker/superset_config.py /app/superset/config.py
-COPY .docker/snowguard-cron /etc/cron.d/snowguard-cron
-COPY ./internal/api/alert/templates/ /home/snowguard/internal/api/alert/templates/
+COPY .docker/skiguard-cron /etc/cron.d/skiguard-cron
+COPY ./internal/api/alert/templates/ /home/skiguard/internal/api/alert/templates/
 
-RUN crontab /etc/cron.d/snowguard-cron && touch /var/log/cron.log
+RUN crontab /etc/cron.d/skiguard-cron && touch /var/log/cron.log
 
-ENTRYPOINT ["/home/snowguard/entrypoint.sh"]
+ENTRYPOINT ["/home/skiguard/entrypoint.sh"]

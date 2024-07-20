@@ -13,16 +13,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/scalecraft/snowguard/internal/api/alert"
-	"github.com/scalecraft/snowguard/internal/api/delete"
-	"github.com/scalecraft/snowguard/internal/api/health"
-	"github.com/scalecraft/snowguard/internal/api/load"
-	"github.com/scalecraft/snowguard/internal/api/truncate"
-	"github.com/scalecraft/snowguard/internal/api/update"
-	"github.com/scalecraft/snowguard/internal/config"
-	"github.com/scalecraft/snowguard/internal/duckdb"
-	"github.com/scalecraft/snowguard/internal/slack"
-	"github.com/scalecraft/snowguard/internal/snowflake"
+	"github.com/scalecraft/skiguard/internal/api/alert"
+	"github.com/scalecraft/skiguard/internal/api/delete"
+	"github.com/scalecraft/skiguard/internal/api/health"
+	"github.com/scalecraft/skiguard/internal/api/load"
+	"github.com/scalecraft/skiguard/internal/api/truncate"
+	"github.com/scalecraft/skiguard/internal/api/update"
+	"github.com/scalecraft/skiguard/internal/config"
+	"github.com/scalecraft/skiguard/internal/duckdb"
+	"github.com/scalecraft/skiguard/internal/slack"
+	"github.com/scalecraft/skiguard/internal/snowflake"
 )
 
 func dbMigration() {
@@ -104,7 +104,7 @@ func main() {
 		}
 	}()
 
-	slog.Info("Snowguard application started successfully.")
+	slog.Info("skiguard application started successfully.")
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)

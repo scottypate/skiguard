@@ -20,7 +20,7 @@ func (s *SlackAlertMessage) Send() error {
 	client := slack.New(s.Token)
 	// Header Section
 	headerText := slack.NewTextBlockObject("mrkdwn", fmt.Sprintf(
-		":warning: Snowguard flagged the following activity as being abnormal.\n The following activity exceeded the alert threshold of `p%d` for the most recent hour.", int(s.AlertThreshold*100)),
+		":warning: Skiguard flagged the following activity as being abnormal.\n The following activity exceeded the alert threshold of `p%d` for the most recent hour.", int(s.AlertThreshold*100)),
 		false, false)
 	headerSection := slack.NewSectionBlock(headerText, nil, nil)
 
