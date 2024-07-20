@@ -7,7 +7,7 @@ services:
       dockerfile: .docker/snowguard.Dockerfile
     container_name: snowguard
     ports:
-      - "50052:8088"
+      - "8088:8088"
       - "50051:50051"
     environment:
       - SNOWFLAKE_USER=${SNOWFLAKE_USER}
@@ -16,5 +16,6 @@ services:
       - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE}
       - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE}
       - SUPERSET_ADMIN_KEY=${SUPERSET_ADMIN_KEY}
+      - SNOWGUARD_LICENSE_KEY=${SNOWGUARD_LICENSE_KEY}
     volumes:
       - ./snowguard/test:/home/snowguard/test
