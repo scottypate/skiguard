@@ -22,7 +22,7 @@ failed_logins as (
         and
         hours.generated_hour <= '{{ .NowUTC }}'
     group by 1 order by 1 desc
-)make 
+)
 select
     generated_hour,
     max(failed_logins) over () as metric_value,
