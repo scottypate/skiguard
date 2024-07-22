@@ -25,7 +25,7 @@ failed_logins as (
 )
 select
     generated_hour,
-    failed_logins over () as metric_value,
+    failed_logins as metric_value,
     row_number() over (order by generated_hour desc) as rn,
     max(failed_logins) over () as p100
 from
