@@ -20,9 +20,9 @@ failed_logins as (
     where
         (event_timestamp > current_date() - to_days(30) or event_timestamp is null)
         and
-        hours.generated_hour <= current_timestamp
+        hours.generated_hour <= '{{ .NowUTC }}'
     group by 1 order by 1 desc
-)
+)make 
 select
     generated_hour,
     max(failed_logins) over () as metric_value,
@@ -31,4 +31,6 @@ select
 from
     failed_logins
 qualify
-    rn = 1;
+    rn = 1
+    and
+    failed_logins > (p100 * {{ .AlertThreshold }}) ;
