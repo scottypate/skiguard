@@ -25,6 +25,22 @@ push-image:
 
 	docker manifest push scalecraft/skiguard:latest
 
+	docker tag scalecraft/skiguard:$(VERSION)-linux-arm64 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-arm64
+	docker tag scalecraft/skiguard:$(VERSION)-linux-amd64 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-amd64
+
+	docker push 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-arm64
+	docker push 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-amd64
+
+	docker manifest create 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION) \
+		--amend 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-arm64 --amend 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-amd64
+
+	docker manifest push 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)
+
+	docker manifest create 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:latest \
+		--amend 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-arm64 --amend 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:$(VERSION)-linux-amd64
+
+	docker manifest push 709825985650.dkr.ecr.us-east-1.amazonaws.com/scalecraft/skiguard:latest
+
 .PHONY: build
 build:
 	./scripts/build.sh
