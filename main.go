@@ -19,6 +19,7 @@ import (
 	"github.com/scalecraft/skiguard/internal/api/load"
 	"github.com/scalecraft/skiguard/internal/api/truncate"
 	"github.com/scalecraft/skiguard/internal/api/update"
+	"github.com/scalecraft/skiguard/internal/api/validate"
 	"github.com/scalecraft/skiguard/internal/config"
 	"github.com/scalecraft/skiguard/internal/duckdb"
 	"github.com/scalecraft/skiguard/internal/slack"
@@ -53,7 +54,9 @@ func main() {
 		slog.Debug("no .env file found. proceeding with existing environment variables")
 	}
 	cfg := config.GetConfig()
-	config.ValidateLicenseKey(cfg.LicenseKey)
+	if err := config.ValidateLicenseKey(cfg.LicenseKey); err != nil {
+		log.Fatalf("error validating license key: %v", err)
+	}
 
 	gin.SetMode(cfg.GinMode)
 
@@ -92,6 +95,7 @@ func main() {
 	r.POST("/alert", alert.PostHandler(cfg))
 	r.POST("/truncate", truncate.PostHandler())
 	r.DELETE("/delete", delete.DeleteHandler())
+	r.GET("/validate", validate.GetHandler(cfg))
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", cfg.HttpPort),
