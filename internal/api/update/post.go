@@ -37,10 +37,6 @@ func PostHandler(cfg *config.Config) gin.HandlerFunc {
 }
 
 func update(req PostHandlerRequest) (*PostHandlerResponse, error) {
-	if err := config.ValidateLicenseKey(req.cfg.LicenseKey); err != nil {
-		return nil, err
-	}
-
 	snowflakeDB, err := snowflake.Connect(req.cfg.SnowflakeDSN)
 	if err != nil {
 		return nil, err

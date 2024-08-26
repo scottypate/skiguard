@@ -1,0 +1,13 @@
+services:
+
+  skiguard:
+    image: scalecraft/skiguard:latest
+    ports:
+      - "8088:8088"
+    environment:
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE}
+      - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE}
+      - SKIGUARD_LICENSE_KEY=${SKIGUARD_LICENSE_KEY}

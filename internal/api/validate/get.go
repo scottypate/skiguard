@@ -33,9 +33,5 @@ func GetHandler(cfg *config.Config) gin.HandlerFunc {
 
 func validate(req *GetHandlerRequest) (*GetHandlerResponse, error) {
 
-	if err := config.ValidateLicenseKey(req.cfg.LicenseKey); err != nil {
-		return nil, err
-	}
-
 	return &GetHandlerResponse{}, nil
 }

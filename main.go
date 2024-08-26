@@ -54,9 +54,6 @@ func main() {
 		slog.Debug("no .env file found. proceeding with existing environment variables")
 	}
 	cfg := config.GetConfig()
-	if err := config.ValidateLicenseKey(cfg.LicenseKey); err != nil {
-		log.Fatalf("error validating license key: %v", err)
-	}
 
 	gin.SetMode(cfg.GinMode)
 
